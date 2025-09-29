@@ -49,9 +49,11 @@ export default function Home() {
       if (updErr) throw updErr;
 
       setStatus("done");
-    } catch (err: any) {
+    } catch (err: unknown) {
       setStatus("error");
-      setError(err?.message ?? "Failed to update password.");
+      setError(
+        err instanceof Error ? err.message : "Failed to update password."
+      );
     }
   }
 
